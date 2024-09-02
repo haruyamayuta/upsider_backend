@@ -2,6 +2,7 @@
 
 起動方法
 ```
+$ ./gradlew build
 $ docker-compose up
 ```
 
