@@ -4,6 +4,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import jp.co.upsider.entities.CustomError
+import jp.co.upsider.entities.Errors
 import jp.co.upsider.models.Clients
 import jp.co.upsider.models.Invoices
 import jp.co.upsider.models.Users
@@ -32,7 +33,7 @@ object FetchInvoices {
 
     fun execute(params: Input): Result<List<Output>, CustomError> {
         //user情報取得
-        val user = Users.fetchById(params.userId) ?: return Err(CustomError("user not found", 1000))
+        val user = Users.fetchById(params.userId) ?: return Err(Errors.USER_NOT_FOUND.value)
 
         //指定した時間でデータを取得
         //startDateとendDateをDate型に変換

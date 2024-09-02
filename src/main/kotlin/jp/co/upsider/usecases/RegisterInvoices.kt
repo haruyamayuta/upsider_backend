@@ -46,18 +46,14 @@ object RegisterInvoices {
         val taxValue = ceil( feeValue * taxRateValue).toInt()
 
         val billingAmountValue = params.paymentAmount + feeValue + taxValue
-
+        val user = Users.fetchById(params.userId) ?: return Err(Errors.USER_NOT_FOUND.value)
+        val client = Clients.fetchById(params.clientId) ?: return Err(Errors.CLIENT_NOT_FOUND.value)
 
         var invoice: Invoice? = null
-        var client: Client? = null
         transaction {
-            //usersテーブル情報取得
-            val userInfo = User.findById(params.userId)?: return@transaction Err(Errors.USER_NOT_FOUND.value)
-            client = Client.findById(params.clientId)?: return@transaction Err(Errors.CLIENT_NOT_FOUND.value)
-
             invoice =
                 Invoice.new {
-                    companyId = userInfo.companyId
+                    companyId = user.companyId
                     clientId = params.clientId
                     issueDate = params.issueData
                     paymentAmount = params.paymentAmount
@@ -73,7 +69,7 @@ object RegisterInvoices {
 
         return Ok(
             Output(
-                clientName = client!!.corporateName,
+                clientName = client.corporateName,
                 issueData = invoice!!.issueDate.toString(),
                 fee = invoice!!.fee,
                 feeRate = invoice!!.feeRate,

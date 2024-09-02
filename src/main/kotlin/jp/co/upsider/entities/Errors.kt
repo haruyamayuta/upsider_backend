@@ -9,7 +9,7 @@ import kotlinx.serialization.Transient
 data class CustomError(
     val message:String,
     val code: Int,
-    @Transient val status: HttpStatusCode = HttpStatusCode.OK
+    @Transient val status: HttpStatusCode = HttpStatusCode.BadRequest
 )
 
 enum class Errors(val value: CustomError){

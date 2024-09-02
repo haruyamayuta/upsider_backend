@@ -20,6 +20,14 @@ object Clients: LongIdTable("Clients"){
     val createdAt = datetime("created_at").clientDefault { ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime() }
     val updatedAt = datetime("updated_at").clientDefault { ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime() }
 
+    fun fetchById(id:Long):Client?{
+        return transaction {
+            Client.find{
+                Clients.id eq(id)
+            }.limit(1).firstOrNull()
+        }
+    }
+
     fun fetchByIds(id: List<Long>): List<Client> {
         return transaction {
             Client.find { Clients.id inList id }.toList()
