@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=jdbc:mysql://db/invoices
+      - DATABASE_URL=jdbc:mysql://db/backend
       - DATABASE_USER=root
       - DATABASE_PASSWORD=pass
     depends_on:
@@ -23,13 +23,13 @@ services:
     environment:
       - MYSQL_ROOT_HOST=%
       - MYSQL_ROOT_PASSWORD=pass
-      - MYSQL_DATABASE=invoices
+      - MYSQL_DATABASE=backend
 
   flyway:
     image: flyway/flyway:latest
     command: ["migrate"]
     environment:
-      - FLYWAY_URL=jdbc:mysql://db/invoices?allowPublicKeyRetrieval=true # コンテナ内のポート
+      - FLYWAY_URL=jdbc:mysql://db/backend?allowPublicKeyRetrieval=true # コンテナ内のポート
       - FLYWAY_USER=root
       - FLYWAY_PASSWORD=pass
     volumes:

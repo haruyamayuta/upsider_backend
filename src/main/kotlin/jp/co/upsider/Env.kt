@@ -12,5 +12,5 @@ object Env {
     val dbUser = dotenv["DB_USER"]?:"root"
     val dbPass = dotenv["DB_PASS"]?:"pass"
     val dbUrl = dotenv["DB_URL"]?:"jdbc:mysql://localhost:3306"
-    val dbName = dotenv["DB_NAME"]?:"invoices"
+    val dbName = dotenv["DB_NAME"]?:"backend"
 }
