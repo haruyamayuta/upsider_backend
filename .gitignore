@@ -34,3 +34,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Mac OSX ###
+.DS_Store
+
+### kotlin ###
+.kotlin
+
+### run ###
+run
